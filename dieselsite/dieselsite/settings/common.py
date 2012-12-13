@@ -63,7 +63,7 @@ MIDDLEWARE_CLASSES = (
 # app registry
 INSTALLED_APPS = (
     # our apps
-    'dieselrobin',
+    'diesel',
     # 3rd party
     'south',
     # django
