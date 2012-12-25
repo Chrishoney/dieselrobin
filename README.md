@@ -15,4 +15,4 @@
   </tr>
 </table>
 
-This repo contains everything needed to run a dieselrobin competition.
+This repo ~~contains~~ will contain everything needed to run a dieselrobin competition.
