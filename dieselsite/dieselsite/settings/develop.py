@@ -9,3 +9,7 @@ DATABASES = {
         'NAME': os.path.join(SITE_ROOT, 'temp.db'),
     }
 }
+
+INSTALLED_APPS += (
+    'django_extensions',
+)

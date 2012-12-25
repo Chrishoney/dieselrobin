@@ -11,6 +11,22 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
+# app registry
+INSTALLED_APPS = (
+    # our apps
+    'diesel',
+    # 3rd party
+    'south',
+    # django
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.sites',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'django.contrib.admin',
+)
+
 # time and language settings
 TIME_ZONE = 'America/Chicago'
 LANGUAGE_CODE = 'en-us'
@@ -60,21 +76,6 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
 )
 
-# app registry
-INSTALLED_APPS = (
-    # our apps
-    'diesel',
-    # 3rd party
-    'south',
-    # django
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.sites',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'django.contrib.admin',
-)
 
 #LOGGING = {
 #    'version': 1,
