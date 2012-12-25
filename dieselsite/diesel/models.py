@@ -49,6 +49,7 @@ class Player(models.Model):
     def __unicode__(self):
         return u'%s' % self.name.username
 
+
 class Character(models.Model):
     '''
     Define a character and related data.
@@ -69,6 +70,7 @@ class Character(models.Model):
 
     def __unicode__(self):
         return u'<Character - %s>' % self.combo
+
 
 class Mission(models.Model):
     '''
