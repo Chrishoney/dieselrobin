@@ -48,9 +48,10 @@ died of old age at that point. The start and end times will be posted in
 
 ### Composition
 
-Teams are made up of 3 players. Players are allowed to form their own teams or
-join up solo and get assigned to a team randomly. Team rosters are frozen 48
-hours after the start of the competition. 
+Teams are made up of 3 players. The account must be owned by a single
+individual, which means NO ROBIN ACCOUNTS. Players are allowed to form their
+own teams or join up solo and get assigned to a team randomly. Team rosters are
+frozen 48 hours after the start of the competition. 
 
 ### Substitutions
 
