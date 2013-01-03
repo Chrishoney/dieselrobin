@@ -1,13 +1,16 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+# choice tuples
+REGULAR_CHOICES = tuple((n, str(n)) for n in xrange(1, 15))
+BONUS_CHOICES = tuple(REGULAR_CHOICES[:3])
+
 class Team(models.Model):
     '''
     Represent a team.
 
     Holds the team name, the team score, and a few pieces of data
     '''
-    # attributes
     name = models.CharField(max_length=50)
     score = models.PositiveIntegerField(default=0)
     max_players = models.PositiveIntegerField(default=3)
@@ -72,34 +75,33 @@ class Character(models.Model):
         return u'<Character - %s>' % self.combo
 
 
-class Mission(models.Model):
+class MissionBase(models.Model):
     '''
-    Define a mission and related parameters.
-
-    Both regular and bonus missions are represented by this class.
-    The foreignkeys are mostly for reverse lookups, but also to loosely
-    associate models with each other.
-
-    TODO: Look into replacing the ForeignKey fields with a ManytoManyField
+    Abstract base class that contains data in common to both mission types
+    
+    This model cannot be instantiated directly, you must subclass it.
     '''
     player = models.ForeignKey(Player)
     combo = models.ForeignKey(Character)
-    bonus_mission = models.BooleanField(default=False)
-
     description = models.TextField()
+    complete = models.BooleanField(default=False)
+
+    class Meta:
+        abstract = True
+
+class RegularMission(MissionBase):
+    number = models.PositiveIntegerField(choices=REGULAR_CHOICES)
+    failed = models.BooleanField(default=False)
     new_locations = models.CharField(
         max_length=255, help_text="New locations allowed by this mission"
     )
-    complete = models.BooleanField(default=False)
-    failed = models.BooleanField(default=False)
 
     def __unicode__(self):
-        return u'<Mission %s>' % self.id
+        return u'Mission %s' % self.number
 
-    @property
-    def number(self):
-        return self.id
+class BonusMission(MissionBase):
+    tier = models.PositiveIntegerField(choices=BONUS_CHOICES)
+    number = models.PositiveIntegerField(BONUS_CHOICES)
 
-    @property
-    def short_name(self):
-        return u'%s %s' % ('Mission', self.number)
+    def __unicode__(self):
+        return u'Bonus Mission: Tier %s, Mission %s' % (self.tier, self.number)
