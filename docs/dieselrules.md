@@ -152,7 +152,7 @@ Get a Lair rune. New locations: one Lair subbranch.
 Mission 5: 
     </th>
     <td>
-Find the entrance to Tomb and enter the end of Crypt. New locations: Vault:1-4,
+Find the entrance to Tomb and enter the end of Crypt. New locations: Vault:1-3,
 Crypt. (Missions 5, 6, and 7 can be done in any order.)
     </td>
   </tr>
@@ -179,7 +179,7 @@ Vestibule. (Missions 5, 6, and 7 can be done in any order.)
 Mission 8:
     </th>
     <td>
-Get the silver or golden rune. New locations: either Vault:5-8 + Blade or Tomb,
+Get the silver or golden rune. New locations: either Vault:4-5 + Blade or Tomb,
 along with Zot (since you have 3 runes now).
     </td>
   </tr>
@@ -197,7 +197,7 @@ can be done in any order.)
 Mission 10: 
     </th>
     <td>
-Get the silver or golden rune. New locations: either Vault:5-8 + Blade or Tomb.
+Get the silver or golden rune. New locations: either Vault:4-5 + Blade or Tomb.
 (Missions 9-14 can be done in any order.)
     </td>
   </tr>
