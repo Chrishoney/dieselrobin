@@ -12,7 +12,7 @@ to Lair, Lair:1-8).
 * Tiles and console players can unite as one on CSZO and CAO
 * Teams can be chosen by players, solo players are randomly assigned teams. 
 * Team size is 3.
-* Bonus missions. There are 3 tiers of missions, with 3 missions a piece.
+* Bonus missions. There are 3 tiers of missions, with 3 missions per tier.
 * Scoring formulae
 * Combo selection
 * 2 more days of playtime!
@@ -34,7 +34,7 @@ Combos  which force a certain playstyle or set of circumstances are interesting
 to play solo, but can be frustrating (or boring, in the case of overpowered
 combos) in an ad-hoc team environment. Combos of the latter nature may be
 replaced at the discretion of the organizers. In addition, some number of
-randomly chosen combos will be replaced. All replacements will come from the
+randomly chosen combos may be replaced. All replacements will come from the
 oldwon pool.
 
 **Time Frame**
