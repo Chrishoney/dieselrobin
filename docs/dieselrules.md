@@ -1,4 +1,4 @@
-﻿# Dieselrobin Rules
+# Dieselrobin Rules
 
 **Summary**
 
@@ -42,7 +42,8 @@ oldwon pool.
 The competition will start on a Friday at 19:00 UTC and will end 16 days later
 on Sunday at 19:00 UTC. Any games still in progress will be scored as if they
 died of old age at that point. The start and end times will be posted in
-`??dieselrobin[3]`
+`??dieselrobin[4]`
+
 
 ## Teams
 
@@ -69,11 +70,13 @@ decide which player will start which character (once combos are assigned).
 
 Making a learndb entry with your team's information might be a good idea. An example:
 
-    team purityofessence[1/4]: Account names: PRECIOUS, BODILY, FLUIDS
-    Turn order is pivotal -> elliptic -> ophanim -> pivotal
+    team dd guide[1/3]: elliptic, pivotal, ophanim. Accounts: MAKHLEB 
+    (TrHu), USETHEWAND (HuSu), RECHARGEIT (DrEE). Play order: elliptic ->
+    ophanim -> pivotal -> elliptic.
 
 You should also duplicate the [scoring sheet template](https://docs.google.com/spreadsheet/ccc?key=0AsDUl9FTpJmLdEh2ZnYtUlp3a3BESWJlUERqYklCdUE)
 and use that speadsheet to keep track of your team’s progress.
+
 
 ## For Players
 
@@ -110,7 +113,7 @@ instead; once begun, the only options are completion, death, or going to Zot and
 winning instead. You do not have to stop immediately when you have completed the
 tasks in the mission; they are just the minimum you have to do.
 
-These missions will be in the `??mission entry` in the learndb for easy reference.
+These missions will be in the `??mission` entry in the learndb for easy reference.
 
 <table>
   <tr>
@@ -136,7 +139,7 @@ Mission 3:
     </th>
     <td>
 Enter the shops in the Orc:4 shop vault and find the entrance to Vault. New
-locations: Orc, Elf, D:14-19.
+locations: Orc, Elf, D:14-20.
     </td>
   </tr>
   <tr>
@@ -152,8 +155,8 @@ Get a Lair rune. New locations: one Lair subbranch.
 Mission 5: 
     </th>
     <td>
-Find the entrance to Tomb and enter the end of Crypt. New locations: Vault:1-3,
-Crypt. (Missions 5, 6, and 7 can be done in any order.)
+Find the entrance to Tomb and enter the end of Crypt. New locations: Vault:1-4,
+Crypt, Blade. (Missions 5, 6, and 7 can be done in any order.)
     </td>
   </tr>
   <tr>
@@ -179,7 +182,7 @@ Vestibule. (Missions 5, 6, and 7 can be done in any order.)
 Mission 8:
     </th>
     <td>
-Get the silver or golden rune. New locations: either Vault:4-5 + Blade or Tomb,
+Get the silver or golden rune. New locations: either Vault:5 or Tomb,
 along with Zot (since you have 3 runes now).
     </td>
   </tr>
@@ -197,7 +200,7 @@ can be done in any order.)
 Mission 10: 
     </th>
     <td>
-Get the silver or golden rune. New locations: either Vault:4-5 + Blade or Tomb.
+Get the silver or golden rune. New locations: either Vault:5 or Tomb.
 (Missions 9-14 can be done in any order.)
     </td>
   </tr>
@@ -242,23 +245,25 @@ Get the remaining two Hell runes. (Missions 9-14 can be done in any order.)
 There are 3 tiers of bonus missions: Tier 1 (2 points each), Tier 2 (4 points
 each), and Tier 3 (6 points each)
 
-The missions themselves will be kept secret until characters have been assigned
-to teams. Your team will assign one mission from each tier to each character
-before the tournament starts. Once the tournament starts, you cannot change
-bonus mission assignments. The bonus mission assignments will be placed on the
-scoring sheet for your team.
+The missions themselves will be kept secret until the start of the tournament.
+Your team will assign one mission from each tier to each character before
+starting a mission on any character.
+
+Once you have started a mission, the bonus mission assignments are frozen.
+The bonus mission assignments will be placed on the scoring sheet for your team.
 
 If you are unable to assign all your missions due to character/class/race
 makeup, we will swap a conflicting mission with an alternate mission for that
 tier that can be completed.
 
-## Scoring
 
+## Scoring
 
 ### Regular Missions
 
-Each completed mission after mission one is worth one point. Winning is worth 3 points. Thus the
-maximum possible score for each character is 16 points. 
+Each completed mission one is worth one point. Winning a character is worth 3
+points. Thus the maximum possible regular mission score for each character is 17
+points. 
 
 ### Bonus Missions
 
@@ -270,6 +275,15 @@ The character who scores the lowest on the regular mission will have their
 regular mission score dropped. Any bonus missions completed by this character
 are still worth points. 
 
-3\*highest score + min(2\*second highest score, 24) + (first\*2 + second\*4 + third\*6)
+3\*highest score + min(2\*second highest score, 21) + (first\*2 + second\*4 + third\*6)
  
-Max score: 3\*18 + 2\*9 + 3\*6 + 3\*4 +3\*2 = 54 + 18 + 6+ 12 + 18 = 108
+Max score: 51 + 21 + 6 + 12 + 18 = 108
+
+### Ties
+
+In the event that two or more teams have the same final mission score, each team
+will create a new account and start a MuCK. You may not abandon Xom at any point
+during a tiebreaker, and once you die, it's game over dude. No restarts on
+Mission 1.  The starting player can be any player on your team, but the original
+play order must be maintained after Mission 1. Once all teams have died or won,
+the team with the highest score will win.
