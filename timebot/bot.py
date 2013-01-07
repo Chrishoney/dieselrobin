@@ -1,7 +1,6 @@
 import ConfigParser
 import datetime
 import logging
-import re
 import os
 
 from irc.bot import SingleServerIRCBot
