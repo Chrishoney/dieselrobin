@@ -1,0 +1,40 @@
+I will take the time to credit everyone before this repository was created once
+I finish the website. I wanted to add it now to add thanks so I don't forget!
+
+elliptic and mikee_ must be thanked for ~steal~borrowing the idea from the ADOM
+community and creating the initial framework of missions and rules. more on this
+and everyone else in between later :)
+
+Authors:
+
+faze (me)
+
+In no particular order, 
+
+-Thanks to Wensley for providing me with a place to host dieselrobin stuff
+temporarily without hesistation. Even though production won't be hosted on
+seleniac, the fact you welcomed dieselrobin onto your server is greatly
+appreciated!
+
+-Thanks to elliptic for collaborating with me on the rules revisions. I
+initially retained him as a 'consultant', but he went above and beyond and
+helped me get dieselrobin #4 up and running from start to finish. I would've
+missed the start deadline by a day instead of an hour if it weren't for his
+help.
+
+-Thanks to my official co-organizer of dieselrobin #4, ophanim. He was
+instrumental in the initial brainstorm for rule revisions, and the majority of
+the new features were his idea. 3 man teams, a saner set of constraints for
+character selection, and a number of bonus missions were his ideas. I could have
+not asked for a finer co-organizer. A++++++ WOULD HOST DIESELROBIN WITH AGAIN.
+
+Many members from the ##crawl community contributed their time helping out with
+proofreading rule changes, contributing ideas and advice about rules, bonus
+mission ideas, and overall support. Thanks to everyone from ##crawl who helped,
+and the following people in particular:
+
+elliott
+DracoOmega
+rchandra
+crate
+minqmay
