@@ -1,4 +1,3 @@
-from collections import namedtuple
 import ConfigParser
 import datetime
 import logging
@@ -7,7 +6,11 @@ import os
 
 from irc.bot import SingleServerIRCBot
 
-DEBUG = True
+#====================
+# Logging #
+#====================
+
+DEBUG = False
 
 logger = logging.getLogger(__name__)
 if DEBUG:
@@ -19,11 +22,16 @@ if DEBUG:
 
 logger.addHandler(console_handler)
 
+#====================
+# Time Helpers #
+#====================
+
 time_strings = {
     'before': 'dieselrobin starts in %s, %s hours, %s minutes, and %s seconds',
     'during': 'dieselrobin ends in %s, %s hours, %s minutes, and %s seconds',
     'after': 'dieselrobin is over',
 }
+
 
 def delta_to_string(delta, cond):
 
@@ -40,6 +48,10 @@ def delta_to_string(delta, cond):
     hours, minutes, seconds = seconds_to_t(delta.seconds)
     return time_strings[cond] % (days, hours, minutes, seconds)
 
+#====================
+# Timebot Itself #
+#====================
+
 class Timebot(SingleServerIRCBot):
 
     def __init__(self, channel, nick, server, port):
@@ -51,9 +63,9 @@ class Timebot(SingleServerIRCBot):
         self.port = port
         self.nick = nick
 
-    ################## 
+    #====================
     # Event Handlers #
-    ################## 
+    #====================
     
     def on_welcome(self, c, e):
         ''' Join the channel specified in the config file. '''
@@ -65,9 +77,10 @@ class Timebot(SingleServerIRCBot):
         self.handle_command(c, e, e.arguments[0], e.target)
         logger.debug('Message sent to %s' % e.target)
 
-    ################# 
+    #====================
     # User Commands #
-    ################# 
+    #====================
+
     def handle_command(self, c, e, args, source):
         if args.startswith('!time'):
             self.time(c, e, args, source)
@@ -84,12 +97,12 @@ class Timebot(SingleServerIRCBot):
         elif end_delta.days < 0:
             msg = time_strings['after']
         else:
-            logger.warn('Unexpected case fall-through in time function')
+            logger.error('Unexpected case fall-through in time function')
         c.privmsg(source, msg)
 
-#################
+#====================
 # Configuration #
-#################
+#====================
 
 def parse_config(rc='~/.botrc'):
     ''' Parse the default config file and return a dict of settings '''
@@ -105,9 +118,10 @@ def parse_config(rc='~/.botrc'):
     return settings
 
 
-################
+#====================
 # Main Program #
-################
+#====================
+
 def main():
     settings = parse_config()
     server  = settings['server']
