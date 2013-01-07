@@ -173,7 +173,7 @@ and 7 can be done in any order.)
 Mission 7: 
     </th>
     <td>
-Find at least one entrance to Pan, Hell, and Zot. New locations: D:20-27,
+Find at least one entrance to Pan, Hell, and Zot. New locations: D:21-27,
 Vestibule. (Missions 5, 6, and 7 can be done in any order.)
     </td>
   </tr>
@@ -261,9 +261,9 @@ tier that can be completed.
 
 ### Regular Missions
 
-Each completed mission one is worth one point. Winning a character is worth 3
-points. Thus the maximum possible regular mission score for each character is 17
-points. 
+Each completed mission is worth one point. Mission 1 must be completed without
+dying to earn the point. Winning a character is worth 3 points. Thus the maximum
+possible regular mission score for each character is 17 points. 
 
 ### Bonus Missions
 
@@ -275,7 +275,7 @@ The character who scores the lowest on the regular mission will have their
 regular mission score dropped. Any bonus missions completed by this character
 are still worth points. 
 
-3\*highest score + min(2\*second highest score, 21) + (first\*2 + second\*4 + third\*6)
+3\*highest regular score + min(2\*2nd highest regular score, 21) + Tier 1 completed\*2 + Tier 2 completed\*4 + Tier 3 completed\*6
  
 Max score: 51 + 21 + 6 + 12 + 18 = 108
 
