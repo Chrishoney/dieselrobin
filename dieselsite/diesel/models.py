@@ -1,9 +1,30 @@
 from django.db import models
+from django.utils import timezone
+
 from django.contrib.auth.models import User
 
-# choice tuples
-REGULAR_CHOICES = tuple((n, str(n)) for n in xrange(1, 15))
-BONUS_CHOICES = tuple(REGULAR_CHOICES[:3])
+# cumulative stat ideas:
+# missions finished
+# characters killed
+# total competitions
+# competition wins
+
+class Competition(models.Model):
+    start_date = models.DateTimeField()
+    end_date = models.DateTimeField()
+
+    def __unicode__(self):
+        return u'%s' % self.name
+    
+    @property
+    def ongoing(self):
+        now = timezone.now()
+        return (start - now).days < 0 < (end - now).days
+
+    @property
+    def name(self):
+        return u'Dieselrobin %s' % self.start_date.strftime('%A %Y')
+
 
 class Team(models.Model):
     '''
@@ -16,7 +37,7 @@ class Team(models.Model):
     max_players = models.PositiveIntegerField(default=3)
 
     def __unicode__(self):
-        return u'<Team - %s>' % self.name
+        return u'%s' % self.name
 
     def is_full(self):
         return self.players.all().count() == self.max_players
@@ -68,40 +89,18 @@ class Character(models.Model):
 
     # tourney data
     points = models.PositiveIntegerField(default=0)
-    alive = models.BooleanField(default=True)
     won = models.BooleanField(default=False)
 
     def __unicode__(self):
         return u'<Character - %s>' % self.combo
 
+    @property
+    def alive(self):
+        '''
+        Return True if any mission has been failed.
 
-class MissionBase(models.Model):
-    '''
-    Abstract base class that contains data in common to both mission types
-    
-    This model cannot be instantiated directly, you must subclass it.
-    '''
-    player = models.ForeignKey(Player)
-    combo = models.ForeignKey(Character)
-    description = models.TextField()
-    complete = models.BooleanField(default=False)
+        Failed and complete represent two different things.
+        '''
+        qs = self.regular_missions.filter(combo=self.id)
+        return not any(mission.failed for mission in qs)
 
-    class Meta:
-        abstract = True
-
-class RegularMission(MissionBase):
-    number = models.PositiveIntegerField(choices=REGULAR_CHOICES)
-    failed = models.BooleanField(default=False)
-    new_locations = models.CharField(
-        max_length=255, help_text="New locations allowed by this mission"
-    )
-
-    def __unicode__(self):
-        return u'Mission %s' % self.number
-
-class BonusMission(MissionBase):
-    tier = models.PositiveIntegerField(choices=BONUS_CHOICES)
-    number = models.PositiveIntegerField(BONUS_CHOICES)
-
-    def __unicode__(self):
-        return u'Bonus Mission: Tier %s, Mission %s' % (self.tier, self.number)
