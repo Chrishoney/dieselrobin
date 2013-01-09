@@ -12,6 +12,8 @@ from django.contrib.auth.models import User
 class Competition(models.Model):
     start_date = models.DateTimeField()
     end_date = models.DateTimeField()
+    random_teams = models.BooleanField(default=False)
+    team_size = models.PositiveSmallIntegerField()
 
     def __unicode__(self):
         return u'%s' % self.name
@@ -34,24 +36,23 @@ class Team(models.Model):
     '''
     name = models.CharField(max_length=50)
     score = models.PositiveIntegerField(default=0)
-    max_players = models.PositiveIntegerField(default=3)
+    competition = models.ForeignKey(Competition, related_name='teams')
 
     def __unicode__(self):
         return u'%s' % self.name
 
-    def is_full(self):
-        return self.players.all().count() == self.max_players
-
-    def players(self):
+    @property
+    def members(self):
         return self.players.filter(team=self.name)
 
+    @property
     def score(self):
-        characters = self.objects.all()
-        team_characters = characters.players.filter(team=self.id)
-        score = 0
+        chars = self.characters.all()
+        team_characters = chars.players.filter(team=self.id)
+        total = 0
         for char in team_characters:
-            score += char.points
-        return u'%s' % score
+            total += char.points
+        return u'%s' % total
 
 
 class Player(models.Model):
@@ -64,9 +65,9 @@ class Player(models.Model):
     '''
     # attributes
     name = models.ForeignKey(User)
-    team = models.ForeignKey(Team, related_name='players')
-
-    # tourney data
+    team = models.ForeignKey(
+        Team, blank=True, null=True, related_name='players'
+    )
     completed_missions = models.PositiveIntegerField(default=0)
     killed_characters = models.PositiveIntegerField(default=0)
 
@@ -84,7 +85,9 @@ class Character(models.Model):
     '''
     # attributes
     combo = models.CharField(max_length=4)
-    team = models.ForeignKey(Team, related_name='characters')
+    team = models.ForeignKey(
+        Team, blank=True, null=True, related_name='characters'
+    )
     chosen_by = models.ForeignKey(User)
 
     # tourney data
@@ -103,4 +106,3 @@ class Character(models.Model):
         '''
         qs = self.regular_missions.filter(combo=self.id)
         return not any(mission.failed for mission in qs)
-
