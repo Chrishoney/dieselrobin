@@ -47,7 +47,6 @@ STATICFILES_FINDERS = (
 )
 
 # random settings
-SECRET_KEY = 'XJ0z6(;!u/)8_+s|(T*(}iKeM)BWaS;]:G):;6!}AI=j}AkEWx^u'
 
 MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'
 
