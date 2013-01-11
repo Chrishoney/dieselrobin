@@ -8,77 +8,105 @@ from django.db import models
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        # Adding model 'Team'
-        db.create_table('diesel_team', (
+        # Adding model 'Competition'
+        db.create_table('diesel_competition', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('name', self.gf('django.db.models.fields.CharField')(max_length=50)),
-            ('max_players', self.gf('django.db.models.fields.PositiveIntegerField')(default=3)),
+            ('start_date', self.gf('django.db.models.fields.DateTimeField')()),
+            ('end_date', self.gf('django.db.models.fields.DateTimeField')()),
+            ('random_teams', self.gf('django.db.models.fields.BooleanField')(default=False)),
+            ('team_size', self.gf('django.db.models.fields.PositiveSmallIntegerField')()),
         ))
-        db.send_create_signal('diesel', ['Team'])
+        db.send_create_signal('diesel', ['Competition'])
 
         # Adding model 'Player'
         db.create_table('diesel_player', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('name', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['auth.User'])),
-            ('team', self.gf('django.db.models.fields.related.ForeignKey')(related_name='players', to=orm['diesel.Team'])),
-            ('completed_missions', self.gf('django.db.models.fields.PositiveIntegerField')(default=0)),
-            ('killed_characters', self.gf('django.db.models.fields.PositiveIntegerField')(default=0)),
+            ('user', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['auth.User'])),
+            ('next', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['diesel.Player'], null=True, blank=True)),
         ))
         db.send_create_signal('diesel', ['Player'])
+
+        # Adding M2M table for field combo_choice on 'Player'
+        db.create_table('diesel_player_combo_choice', (
+            ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
+            ('player', models.ForeignKey(orm['diesel.player'], null=False)),
+            ('character', models.ForeignKey(orm['diesel.character'], null=False))
+        ))
+        db.create_unique('diesel_player_combo_choice', ['player_id', 'character_id'])
+
+        # Adding M2M table for field starting_combo on 'Player'
+        db.create_table('diesel_player_starting_combo', (
+            ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
+            ('player', models.ForeignKey(orm['diesel.player'], null=False)),
+            ('character', models.ForeignKey(orm['diesel.character'], null=False))
+        ))
+        db.create_unique('diesel_player_starting_combo', ['player_id', 'character_id'])
+
+        # Adding model 'Team'
+        db.create_table('diesel_team', (
+            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('name', self.gf('django.db.models.fields.CharField')(max_length=50)),
+            ('score', self.gf('django.db.models.fields.PositiveIntegerField')(default=0)),
+            ('competition', self.gf('django.db.models.fields.related.ForeignKey')(related_name='teams', to=orm['diesel.Competition'])),
+        ))
+        db.send_create_signal('diesel', ['Team'])
+
+        # Adding M2M table for field members on 'Team'
+        db.create_table('diesel_team_members', (
+            ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
+            ('team', models.ForeignKey(orm['diesel.team'], null=False)),
+            ('player', models.ForeignKey(orm['diesel.player'], null=False))
+        ))
+        db.create_unique('diesel_team_members', ['team_id', 'player_id'])
 
         # Adding model 'Character'
         db.create_table('diesel_character', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('combo', self.gf('django.db.models.fields.CharField')(max_length=4)),
-            ('team', self.gf('django.db.models.fields.related.ForeignKey')(related_name='characters', to=orm['diesel.Team'])),
-            ('chosen_by', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['auth.User'])),
             ('points', self.gf('django.db.models.fields.PositiveIntegerField')(default=0)),
-            ('alive', self.gf('django.db.models.fields.BooleanField')(default=True)),
             ('won', self.gf('django.db.models.fields.BooleanField')(default=False)),
         ))
         db.send_create_signal('diesel', ['Character'])
 
-        # Adding model 'RegularMission'
-        db.create_table('diesel_regularmission', (
+        # Adding model 'Mission'
+        db.create_table('diesel_mission', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('player', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['diesel.Player'])),
-            ('combo', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['diesel.Character'])),
+            ('character', self.gf('django.db.models.fields.related.ForeignKey')(related_name='missions', to=orm['diesel.Character'])),
+            ('type', self.gf('django.db.models.fields.CharField')(max_length=7)),
             ('description', self.gf('django.db.models.fields.TextField')()),
             ('complete', self.gf('django.db.models.fields.BooleanField')(default=False)),
-            ('number', self.gf('django.db.models.fields.PositiveIntegerField')()),
             ('failed', self.gf('django.db.models.fields.BooleanField')(default=False)),
-            ('new_locations', self.gf('django.db.models.fields.CharField')(max_length=255)),
+            ('locations', self.gf('django.db.models.fields.CharField')(max_length=255)),
+            ('tier', self.gf('django.db.models.fields.PositiveSmallIntegerField')()),
+            ('number', self.gf('django.db.models.fields.PositiveSmallIntegerField')()),
         ))
-        db.send_create_signal('diesel', ['RegularMission'])
-
-        # Adding model 'BonusMission'
-        db.create_table('diesel_bonusmission', (
-            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('player', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['diesel.Player'])),
-            ('combo', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['diesel.Character'])),
-            ('description', self.gf('django.db.models.fields.TextField')()),
-            ('complete', self.gf('django.db.models.fields.BooleanField')(default=False)),
-            ('tier', self.gf('django.db.models.fields.PositiveIntegerField')()),
-            ('number', self.gf('django.db.models.fields.PositiveIntegerField')()),
-        ))
-        db.send_create_signal('diesel', ['BonusMission'])
+        db.send_create_signal('diesel', ['Mission'])
 
 
     def backwards(self, orm):
-        # Deleting model 'Team'
-        db.delete_table('diesel_team')
+        # Deleting model 'Competition'
+        db.delete_table('diesel_competition')
 
         # Deleting model 'Player'
         db.delete_table('diesel_player')
 
+        # Removing M2M table for field combo_choice on 'Player'
+        db.delete_table('diesel_player_combo_choice')
+
+        # Removing M2M table for field starting_combo on 'Player'
+        db.delete_table('diesel_player_starting_combo')
+
+        # Deleting model 'Team'
+        db.delete_table('diesel_team')
+
+        # Removing M2M table for field members on 'Team'
+        db.delete_table('diesel_team_members')
+
         # Deleting model 'Character'
         db.delete_table('diesel_character')
 
-        # Deleting model 'RegularMission'
-        db.delete_table('diesel_regularmission')
-
-        # Deleting model 'BonusMission'
-        db.delete_table('diesel_bonusmission')
+        # Deleting model 'Mission'
+        db.delete_table('diesel_mission')
 
 
     models = {
@@ -118,50 +146,48 @@ class Migration(SchemaMigration):
             'model': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '100'})
         },
-        'diesel.bonusmission': {
-            'Meta': {'object_name': 'BonusMission'},
-            'combo': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['diesel.Character']"}),
-            'complete': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'description': ('django.db.models.fields.TextField', [], {}),
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'number': ('django.db.models.fields.PositiveIntegerField', [], {}),
-            'player': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['diesel.Player']"}),
-            'tier': ('django.db.models.fields.PositiveIntegerField', [], {})
-        },
         'diesel.character': {
             'Meta': {'object_name': 'Character'},
-            'alive': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
-            'chosen_by': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['auth.User']"}),
             'combo': ('django.db.models.fields.CharField', [], {'max_length': '4'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'points': ('django.db.models.fields.PositiveIntegerField', [], {'default': '0'}),
-            'team': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'characters'", 'to': "orm['diesel.Team']"}),
             'won': ('django.db.models.fields.BooleanField', [], {'default': 'False'})
         },
-        'diesel.player': {
-            'Meta': {'object_name': 'Player'},
-            'completed_missions': ('django.db.models.fields.PositiveIntegerField', [], {'default': '0'}),
+        'diesel.competition': {
+            'Meta': {'object_name': 'Competition'},
+            'end_date': ('django.db.models.fields.DateTimeField', [], {}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'killed_characters': ('django.db.models.fields.PositiveIntegerField', [], {'default': '0'}),
-            'name': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['auth.User']"}),
-            'team': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'players'", 'to': "orm['diesel.Team']"})
+            'random_teams': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
+            'start_date': ('django.db.models.fields.DateTimeField', [], {}),
+            'team_size': ('django.db.models.fields.PositiveSmallIntegerField', [], {})
         },
-        'diesel.regularmission': {
-            'Meta': {'object_name': 'RegularMission'},
-            'combo': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['diesel.Character']"}),
+        'diesel.mission': {
+            'Meta': {'object_name': 'Mission'},
+            'character': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'missions'", 'to': "orm['diesel.Character']"}),
             'complete': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'description': ('django.db.models.fields.TextField', [], {}),
             'failed': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'new_locations': ('django.db.models.fields.CharField', [], {'max_length': '255'}),
-            'number': ('django.db.models.fields.PositiveIntegerField', [], {}),
-            'player': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['diesel.Player']"})
+            'locations': ('django.db.models.fields.CharField', [], {'max_length': '255'}),
+            'number': ('django.db.models.fields.PositiveSmallIntegerField', [], {}),
+            'tier': ('django.db.models.fields.PositiveSmallIntegerField', [], {}),
+            'type': ('django.db.models.fields.CharField', [], {'max_length': '7'})
+        },
+        'diesel.player': {
+            'Meta': {'object_name': 'Player'},
+            'combo_choice': ('django.db.models.fields.related.ManyToManyField', [], {'related_name': "'characters'", 'symmetrical': 'False', 'to': "orm['diesel.Character']"}),
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'next': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['diesel.Player']", 'null': 'True', 'blank': 'True'}),
+            'starting_combo': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['diesel.Character']", 'symmetrical': 'False'}),
+            'user': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['auth.User']"})
         },
         'diesel.team': {
             'Meta': {'object_name': 'Team'},
+            'competition': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'teams'", 'to': "orm['diesel.Competition']"}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'max_players': ('django.db.models.fields.PositiveIntegerField', [], {'default': '3'}),
-            'name': ('django.db.models.fields.CharField', [], {'max_length': '50'})
+            'members': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['diesel.Player']", 'symmetrical': 'False', 'blank': 'True'}),
+            'name': ('django.db.models.fields.CharField', [], {'max_length': '50'}),
+            'score': ('django.db.models.fields.PositiveIntegerField', [], {'default': '0'})
         }
     }
 
