@@ -6,7 +6,7 @@ Teams of players are assigned race/class combinations (multiple combos per team)
 and team members take turns completing "Missions" with each character (e.g., D
 to Lair, Lair:1-8).
 
-### Changelog
+**Changelog**
 
 * Trunk is mandatory
 * Tiles and console players can unite as one on CSZO and CAO
