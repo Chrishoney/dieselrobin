@@ -15,19 +15,19 @@ def document_model(type, data, pk, model='info.document'):
 if __name__ == '__main__':
 
     docs = ('bonusmissions.md', 'dieselrules.md')
-    target_path = os.path.join(os.curdir, 'docs')
+    docs_path = os.path.join(os.curdir, 'docs')
     fixtures = []
 
-    if not os.path.exists(target_path):
+    if not os.path.exists(docs_path):
         raise IOError(
             "%s is not a valid path. Run using ./bin/update_fixtures" % target
         )
 
     for idx, doc in enumerate(docs):
         idx += 1
-        fname = os.path.join(target_path, doc)
+        fname = os.path.join(docs_path, doc)
         with open(fname) as f:
-            data = ' '.join([line.strip() for line in f])
+            data = ' '.join([line for line in f])
         if idx == 1:
             dtype = 'bonus',
         else:
@@ -37,6 +37,9 @@ if __name__ == '__main__':
     
     # TODO: write directly to appname/fixtures/
     # write to file in project_root.
-    fname = os.path.join(os.path.dirname(target_path), 'documents')
+    target_path = os.path.join(
+        os.path.dirname(docs_path), 'dieselsite', 'info', 'fixtures',
+    )
+    fname = os.path.join(target_path, 'initial_data.json')
     with open(fname, 'w') as f:
-        f.write(json.dumps(fixtures))
+        json.dump(fixtures, f)
