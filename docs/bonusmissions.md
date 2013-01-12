@@ -4,15 +4,15 @@
 
 Value: 2 points each
 
-### A:
+### Mission A:
 
 Clear Elf:3 before entering a lair sub-branch.
 
-### B:
+### Mission B:
 
 Complete mission 2 without worshipping a god as a non-Demigod race.
 
-### C
+### Mission C
 
 Clear Blade during Mission 5 before entering Crypt.
 
@@ -20,15 +20,15 @@ Clear Blade during Mission 5 before entering Crypt.
 
 Value: 4 points each
 
-### D
+### Mission D
 
 Get the slimy rune on mission 4. You must kill the royal jelly.
 
-### E
+### Mission E
 
 Get the golden rune on mission 8 without worshipping Kiku.
 
-### F
+### Mission F
 
 Successfully polymorph the royal jelly into another monster and kill it.
 
@@ -36,15 +36,15 @@ Successfully polymorph the royal jelly into another monster and kill it.
 
 Value: 6 points each
 
-### G
+### Mission G
 
 Orbrun tomb. You may not enter Tomb before getting the orb.
 
-### H
+### Mission H
 
 Kill all 8 hellpanlords.
 
-### I
+### Mission I
 
 Complete a zig as soon after mission 8 as possible:
 
