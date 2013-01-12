@@ -23,7 +23,7 @@ G - Orbrun Tomb: this means not entering Tomb until you are carrying the Orb, an
 H - Kill all unique hellpanlords.
 I - Complete a zig as soon after mission 8 as possible:
     - If you have a zig in D:
-      - If you have enough gold, enter it at the end of turn 8 or the start of turn 9.
+      - If you have enough gold, enter it at the beginning of turn 9 at the latest.
       - If you don't have gold and Tomb will give you enough gold, do Tomb on turn 9
         and then zig at the end of turn 9 or the start of turn 10.
     - If you don't have a zig in D (or it is far too expensive):
