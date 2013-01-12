@@ -1,24 +1,33 @@
+Dieselrobin Bonus Missions January 2013
+ 
+Before starting a character, you must assign one mission of each tier to that
+character, with no repetition between characters. (These missions are still
+optional to complete.)
+
 Tier 1 (2 points):
-- Clear Elf:3 before entering a lair sub-branch
-- Complete mission 2 without worshipping a god (no Dg)
-- Clear Blade during Mission 5 before entering Crypt
+
+A - Clear Elf:3 before entering a Lair sub-branch.
+B - Complete mission 2 without worshipping a god at any point.
+C - Clear Blade during Mission 5 before entering Crypt.
 
 Tier 2 (4 points):
-- Get the slimy rune on mission 4 without worshipping jiyva at any point
-- get the golden rune on mission 8 without worshipping kiku
-- poly trj and kill him
+
+D - Get the slimy rune on mission 4 without worshipping Jiyva at any point.
+E - Get the golden rune on mission 8 without worshipping Kiku at any point.
+F - Polymorph and then kill the royal jelly.
 
 Tier 3 (6 points):
 
-- orbrun tomb
-- Kill all hellpanlords
-- Complete a zig as soon after mission 8 as possible:
-  - if you have a zig in D:
-     - if you have enough gold, enter it asap on turn 8
-     - if you don't have gold and have a zig in D and tomb will give you
-       enough gold, do tomb and then zig at the end of turn 8 or the start of turn 9
-  - if you don't have a zig in D:
-    - you must enter pan on turn 9, and you must enter the first zig you see
-      that you can afford, and you must not leave pan before completing a
-      zig. if no zig is found on turn 9, find a zig before you leave pan on turn
-      10 and complete it on this turn or pass to the player for turn 11
+G - Orbrun Tomb: this means not entering Tomb until you are carrying the Orb, and
+                 then getting the golden rune. (This also counts as mission 10.)
+H - Kill all unique hellpanlords.
+I - Complete a zig as soon after mission 8 as possible:
+    - If you have a zig in D:
+      - If you have enough gold, enter it at the end of turn 8 or the start of turn 9.
+      - If you don't have gold and Tomb will give you enough gold, do Tomb on turn 9
+        and then zig at the end of turn 9 or the start of turn 10.
+    - If you don't have a zig in D (or it is far too expensive):
+      - You must enter pan on turn 9, and you must enter the first zig you see
+        that you can afford, and you must not leave pan before completing a
+        zig. If no zig is found on turn 9, find a zig before you leave pan on turn
+        10.
