@@ -14,7 +14,7 @@ MANAGERS = ADMINS
 # app registry
 INSTALLED_APPS = (
     # our apps
-    'diesel',
+    'info',
     # 3rd party
     'south',
     # django
@@ -25,6 +25,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.admin',
+    'django.contrib.markup',
 )
 
 # time and language settings

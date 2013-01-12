@@ -14,4 +14,5 @@ DATABASES = {
 
 INSTALLED_APPS += (
     'django_extensions',
+    'diesel',
 )

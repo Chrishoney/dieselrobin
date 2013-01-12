@@ -36,6 +36,8 @@ class Competition(models.Model):
     def name(self):
         return u'Dieselrobin %s' % self.start_date.strftime('%A %Y')
 
+class Team(models.Model):
+    pass
 
 class Player(models.Model):
     user = models.ForeignKey(User)
