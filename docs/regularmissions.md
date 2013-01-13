@@ -20,14 +20,16 @@ locations: Orc, Elf, D:14-20.
 
 Get a Lair rune. New locations: one Lair subbranch.
 
-## Part Two - 
+---
 
-**Missions 5, 6, and 7 can be done in any order.**
+## Part Two
+
+#### Missions 5, 6, and 7 can be done in any order.
 
 ### Mission 5
 
 Find the entrance to Tomb and enter the end of Crypt. New locations: Vault:1-4,
-Crypt, Blade. 
+Crypt, Blade.
 
 ### Mission 6
 
@@ -43,9 +45,11 @@ Vestibule.
 Get the silver or golden rune. New locations: either Vault:5 or Tomb,
 along with Zot (since you have 3 runes now).
 
-## Part Three 
+---
 
-**Missions 9-14 can be done in any order.**
+## Part Three
+
+#### Missions 9-14 can be done in any order.
 
 ### Mission 9
 
