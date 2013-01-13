@@ -9,7 +9,8 @@ urlpatterns = patterns('',
 )   
 
 urlpatterns += patterns('info.views',
+    url(r'^$', 'index', name='index'),
     url(r'^rules/$', 'rules', name='rules'),
-    url(r'^missions/bonus/$', 'bonus', name='bonus'),
-    url(r'^missions/regular/$', 'regular', name='regular'),
+    url(r'^bonus/$', 'bonus', name='bonus'),
+    url(r'^regular/$', 'regular', name='regular'),
 )
