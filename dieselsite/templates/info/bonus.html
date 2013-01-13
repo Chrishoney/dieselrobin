@@ -1,5 +1,64 @@
 {% extends "base.html" %}
-{% block content %}
-{% load markup %}
-{{ bonus.data|markdown }}
+{% block content%}
+<h1>Bonus Missions</h1>
+
+<h2>Tier 1 (2 points)</h2>
+
+<h3>Mission A:</h3>
+
+<p>Clear Elf:3 before entering a lair sub-branch.</p>
+
+<h3>Mission B:</h3>
+
+<p>Complete mission 2 without worshipping a god at any point. (Dg doens't count)</p>
+
+<h3>Mission C</h3>
+
+<p>Clear Blade during Mission 5 before entering Crypt.</p>
+
+<h2>Tier 2 (4 points)</h2>
+
+<h3>Mission D</h3>
+
+<p>Get the slimy rune on mission 4 without worshipping Jiyva at any point.</p>
+
+<h3>Mission E</h3>
+
+<p>Get the golden rune on mission 8 without worshipping Kiku at any point.</p>
+
+<h3>Mission F</h3>
+
+<p>Polymorph and then kill the royal jelly without worshipping Jiyva at any point.</p>
+
+<h2>Tier 3 (6 points)</h2>
+
+<h3>Mission G</h3>
+
+<p>Orbrun Tomb. You may not enter Tomb until you are carrying the orb, and you
+must get the golden rune. Completing this bonus mission also fulfills the
+requirements for mission 10.</p>
+
+<h3>Mission H</h3>
+
+<p>Kill all 8 hellpanlords.</p>
+
+<h3>Mission I</h3>
+
+<p>Complete a zig as soon after mission 8 as possible:</p>
+
+<ul>
+<li>If you have a zig in D:
+<ul>
+<li>If you have enough gold, enter it at the beginning of turn 9 at the latest.</li>
+<li>If you don't have gold and Tomb will give you enough gold, do Tomb on turn 9
+and then zig at the end of turn 9 or the start of turn 10.</li>
+</ul></li>
+<li>If you don't have a zig in D (or it is far too expensive):
+<ul>
+<li>You must enter pan on turn 9, and you must enter the first zig you see
+that you can afford, and you must not leave pan before completing a
+zig. If no zig is found on turn 9, find a zig before you leave pan on turn
+10.</li>
+</ul></li>
+</ul>
 {% endblock %}
