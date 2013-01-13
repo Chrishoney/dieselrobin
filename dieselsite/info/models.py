@@ -17,4 +17,4 @@ class Document(models.Model):
     data = models.TextField()
 
     def __unicode__(self):
-        return u'doc type: %s' % self.name
+        return u'doc type: %s' % self.type
