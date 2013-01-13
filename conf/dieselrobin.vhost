@@ -1,0 +1,13 @@
+<VirtualHost dieselrobin.org:80>
+    ServerName dieselrobin.org
+    ServerAlias www.dieselrobin.org
+    ServerAdmin chrishoney@gmail.com
+
+    WSGIScriptAlias / /var/www/dieselsite/dieselsite/wsgi.py
+    WSGIPythonPath /var/www/dieselsite/dieselsite/wsgi.py:/usr/local/venv/dieselrobin/lib/python2.7/site-packages
+
+    <Directory /var/www/dieselsite>
+        Order deny,allow
+        Allow from all
+    </Directory>
+</VirtualHost>
