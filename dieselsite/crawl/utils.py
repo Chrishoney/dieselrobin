@@ -107,6 +107,7 @@ class ComboData(object):
             'hu': ('Hu', 'Hunter'),
             'as': ('As', 'Assassin'),
             'ar': ('Ar', 'Artificer'),
+            'wn': ('Wn', 'Wanderer'),
             'be': ('Be', 'Berserker'),
             'ak': ('AK', 'Abyssal Knight'),
             'ck': ('CK', 'Chaos Knight'),
@@ -131,13 +132,16 @@ class ComboData(object):
 
 combo_data = ComboData()
 
+ALL_RACES = set(
+    'Ce DD DE Dg Dr Ds Fe Gh Ha HE HO Hu Ko Mf Mi Mu Na Og Op SE Sp Te Tr Vp'.split())
+
 def valid_character(race, cls):
     race, cls = race.lower(), cls.lower()
     short, long, restricted = combo_data.races[race]
     return not cls in restricted if restricted else True
 
 VALID_CHARACTERS = tuple(
-    ((race + cls, race_data[0] + cls_data[0]) 
+    ((race + cls, race_data[0] + cls_data[0])
         for race, race_data in combo_data.races.items()
         for cls, cls_data in combo_data.classes.items()
         if valid_character(race, cls)
@@ -145,11 +149,11 @@ VALID_CHARACTERS = tuple(
 )
 
 if __name__ == '__main__':
+    from pprint import pprint
     races, classes = ['mi', 'mu', 'ho', 'fe'], ['dk', 'tm', 'be', 'gl']
     tests = zip(races, classes)
     for test in tests:
         print test, valid_character(*test)
     chars = sorted([can for s, can in VALID_CHARACTERS])
+    pprint(chars)
     print len(chars)
-    print ', '.join(chars)
-
