@@ -1,5 +1,3 @@
-from collections import namedtuple
-
 import requests
 
 server_data = {
@@ -59,7 +57,6 @@ def check_rc_file(server, player):
     fname = player + '.rc'
     passphrase = default_passphrase
     req_url = '/'.join([servers[server].rc, fname]) 
-    print req_url
     response = requests.get(req_url)
     if str(response.iter_lines().next().strip()) == passphrase:
         return True
