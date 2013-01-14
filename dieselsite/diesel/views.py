@@ -25,3 +25,9 @@ def character(request, character, template='characters.html'):
 def characters(request, template="characters.html"):
     characters = Character.objects.all()
     return render(request, template, {'characters': characters})
+
+def competition(request, number, template='competition.html'):
+    comp = get_object_or_404(Competition, number=number)
+
+def standings(request, template="standings.html"):
+    comp = Competition.objects.order_by('start_date')[0]
