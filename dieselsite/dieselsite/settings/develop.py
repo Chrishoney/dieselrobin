@@ -16,4 +16,5 @@ INSTALLED_APPS += (
     'south',
     'django_extensions',
     'diesel',
+    'info',
 )
