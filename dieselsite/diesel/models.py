@@ -26,7 +26,6 @@ class Competition(models.Model):
     end_date = models.DateTimeField()
     random_teams = models.BooleanField(default=False)
     team_size = models.PositiveSmallIntegerField(default=3)
-    #players = models.ManyToManyField()
     def __unicode__(self):
         return u'%s' % self.name
 
@@ -41,8 +40,11 @@ class Competition(models.Model):
 
 
 class Player(models.Model):
-    user = models.ForeignKey(User)
-    next = models.ForeignKey('self', blank=True, null=True)
+    '''
+    related setting in common.py: 'AUTH_PROFILE_MODULE'
+    '''
+    user = models.OneToOneField(User)
+    preferred_server = models.CharField(max_length=3, choices=SERVERS)
     def __unicode__(self):
         return u'%s' % self.user.username
 
@@ -50,8 +52,16 @@ class Player(models.Model):
 class Team(models.Model):
     name = models.CharField(max_length=50)
     competition = models.ForeignKey(Competition, related_name='teams')
-    players = models.ManyToManyField(Player)
+    players = models.ManyToManyField(Player, through='TeamMember')
     server = models.CharField(max_length=4, choices=SERVERS)
+
+
+class TeamMember(models.Model):
+    player = models.ForeignKey(Player)
+    # set default foreignkey to TEAM RANDOM
+    team = models.ForeignKey(Team)
+    # limit play order position choices to valid ones
+    position = models.PositiveSmallIntegerField(blank=True)
 
 
 class Character(models.Model):
