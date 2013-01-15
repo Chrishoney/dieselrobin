@@ -34,19 +34,14 @@ class Server(object):
     def morgue(self):
         return u'%s/%s' % (self.url, self._morgue)
 
-# 'Server' instances
-cao = Server('cao', **server_data['cao'])
-cdo = Server('cdo', **server_data['cdo'])
-cszo = Server('cszo', **server_data['cszo'])
-
-# this passphrase is used if one isn't present in the settings module
-default_passphrase = 'dieselrobin'
-
 servers = {
-    'cao': cao,
-    'cdo': cdo,
-    'cszo': cszo,
+    'cao': Server('cao', **server_data['cao']),
+    'cdo': Server('cdo', **server_data['cdo']),
+    'cszo':  Server('cszo', **server_data['cszo']),
 }
+
+# phrase compared against line 1 of the player's trunk rcfile
+default_passphrase = 'dieselrobin'
 
 def check_rc_file(server, player):
     '''
@@ -58,13 +53,9 @@ def check_rc_file(server, player):
     passphrase = default_passphrase
     req_url = '/'.join([servers[server].rc, fname]) 
     response = requests.get(req_url)
-    if str(response.iter_lines().next().strip()) == passphrase:
-        return True
-    return False
+    return response.iter_lines().next().strip() == passphrase
 
-# combo data
-# TODO: generate valid combo list
-
+# race restrictions
 DG = ('be', 'ak', 'ck', 'dk', 'pr', 'he')
 FE = ('gl', 'hu', 'as', 'ar', 'am')
 DS = VP = UNDEAD = ('pr', 'he')
@@ -132,28 +123,17 @@ class ComboData(object):
 
 combo_data = ComboData()
 
-ALL_RACES = set(
-    'Ce DD DE Dg Dr Ds Fe Gh Ha HE HO Hu Ko Mf Mi Mu Na Og Op SE Sp Te Tr Vp'.split())
-
 def valid_character(race, cls):
     race, cls = race.lower(), cls.lower()
     short, long, restricted = combo_data.races[race]
     return not cls in restricted if restricted else True
 
+# a tuple of tuples: (('hufi', 'HuFi'), ('huas', 'HuAs'))
 VALID_CHARACTERS = tuple(
-    ((race + cls, race_data[0] + cls_data[0])
+    (
+        (race + cls, race_data[0] + cls_data[0])
         for race, race_data in combo_data.races.items()
         for cls, cls_data in combo_data.classes.items()
         if valid_character(race, cls)
     )
 )
-
-if __name__ == '__main__':
-    from pprint import pprint
-    races, classes = ['mi', 'mu', 'ho', 'fe'], ['dk', 'tm', 'be', 'gl']
-    tests = zip(races, classes)
-    for test in tests:
-        print test, valid_character(*test)
-    chars = sorted([can for s, can in VALID_CHARACTERS])
-    pprint(chars)
-    print len(chars)
