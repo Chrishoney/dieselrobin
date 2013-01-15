@@ -46,6 +46,8 @@ STATICFILES_FINDERS = (
 
 # random settings
 
+AUTH_PROFILE_MODULE = 'diesel.Player'
+
 MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'
 
 SESSION_ENGINE = 'django.contrib.sessions.backends.signed_cookies'
