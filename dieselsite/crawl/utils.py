@@ -55,6 +55,10 @@ def check_rc_file(server, player):
     response = requests.get(req_url)
     return response.iter_lines().next().strip() == passphrase
 
+# Combo Data
+#
+# Valid characters for 0.12
+
 # race restrictions
 DG = ('be', 'ak', 'ck', 'dk', 'pr', 'he')
 FE = ('gl', 'hu', 'as', 'ar', 'am')
