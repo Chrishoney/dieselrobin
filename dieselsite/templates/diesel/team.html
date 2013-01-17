@@ -1,0 +1,22 @@
+{% extends "diesel/base.html" %}
+
+{% block title %}{{ team.name }}{% endblock %}
+
+{% block content %}
+<h1>Team {{ team.name }}</h1>
+<p>Server: {{ team.server }}</p>
+<h2>Players</h2>
+<table>
+  <tr>
+    <th>Player</th>
+    <th>Starting Character</th>
+    <th>Chosen Character</th>
+  </tr>
+{% for player in team.players %}
+  <tr>
+    <td>{{ player.crawl_name }}</td>
+    <td>{{ player.starts }}</td>
+    <td>{{ player.choices }}</td>
+  </tr>
+{% endfor %}
+{% endblock %}
