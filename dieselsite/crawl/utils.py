@@ -1,3 +1,4 @@
+from BeautifulSoup import BeautifulSoup
 import requests
 
 server_data = {
@@ -141,3 +142,12 @@ VALID_CHARACTERS = tuple(
         if valid_character(race, cls)
     )
 )
+
+def get_morgue_links(character, server):
+    links = []
+    html = requests.get('/'.join([servers[server].morgue, character]))
+    tags = BeautifulSoup(html).findAll('a')
+    for tag in tags:
+        if 'txt' in tag.content[0]:
+            links.append(tag.content[0])
+    return sorted(links)
