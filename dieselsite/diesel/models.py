@@ -26,6 +26,7 @@ class Competition(models.Model):
     end_date = models.DateTimeField()
     random_teams = models.BooleanField(default=False)
     team_size = models.PositiveSmallIntegerField(default=3)
+
     def __unicode__(self):
         return u'%s' % self.name
 
@@ -44,9 +45,14 @@ class Player(models.Model):
     related setting in common.py: 'AUTH_PROFILE_MODULE'
     '''
     user = models.OneToOneField(User)
-    preferred_server = models.CharField(max_length=3, choices=SERVERS)
+    preferred_server = models.CharField(max_length=4, choices=SERVERS)
+
     def __unicode__(self):
         return u'%s' % self.user.username
+
+    @property
+    def crawl_name(self):
+        return self.user.username
 
 
 class Team(models.Model):
@@ -54,6 +60,9 @@ class Team(models.Model):
     competition = models.ForeignKey(Competition, related_name='teams')
     players = models.ManyToManyField(Player, through='TeamMember')
     server = models.CharField(max_length=4, choices=SERVERS)
+
+    def __unicode__(self):
+        return u'%s' % self.name
 
 
 class TeamMember(models.Model):
@@ -80,7 +89,9 @@ class Character(models.Model):
     dead = models.BooleanField(default=False)
 
     def __unicode__(self):
-        return u'Team %s - %s>' % self.combo
+        if self.account:
+            return u'%s - %s' % (self.combo, self.account) 
+        return u'%s' % self.combo
 
 
 class Mission(models.Model):
