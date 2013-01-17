@@ -74,17 +74,14 @@ class TeamMember(models.Model):
 
 
 class Character(models.Model):
-    chosen_by = models.ForeignKey(Player, related_name='choices')
+    # pre registration fields
     combo = models.CharField(max_length=4)
-
-    initial_player = models.ForeignKey(
-        Player, null=True, blank=True, related_name='starts'
+    picked_by = models.ForeignKey(Player, related_name='picks')
+    # team related fields
+    team = models.ManyToManyField(
+        Team, through='TeamCharacter', blank=True,null=True
     )
-    team = models.ForeignKey(
-        Team, related_name='characters', null=True, blank=True
-    )
-    account = models.CharField(max_length=20, blank=True)
-
+    account = models.CharField(max_length=20)
     won = models.BooleanField(default=False)
     dead = models.BooleanField(default=False)
 
@@ -93,16 +90,24 @@ class Character(models.Model):
             return u'%s - %s' % (self.combo, self.account) 
         return u'%s' % self.combo
 
+class TeamCharacter(models.Model):
+    team = models.ForeignKey(Team)
+    character = models.ForeignKey(Character)
+    starting_player = models.PositiveSmallIntegerField(blank=True)
+
 
 class Mission(models.Model):
-    note = models.TextField(blank=True)
-    player = models.ForeignKey(Player, related_name='missions')
-    character = models.ForeignKey(Character, related_name='missions')
+    # data stored in fixtures
     type = models.CharField(max_length=7, choices=MISSION_TYPES)
-    number = models.PositiveSmallIntegerField(choices=REGULAR_MISSIONS)
+    identifier = models.CharField(max_length=1)
     description = models.TextField()
-    completed = models.BooleanField(default=False)
-    failed = models.BooleanField(default=False)
     # Bonus Missions only
     tier = models.PositiveSmallIntegerField(blank=True, choices=BONUS_TIERS)
-    letter = models.CharField(max_length=1, blank=True, choices=BONUS_LETTERS)
+
+    # data assigned when a mission instance is saved.
+    player = models.ForeignKey(Player, related_name='missions')
+    character = models.ForeignKey(Character, related_name='missions')
+    # booleans/competition related data
+    player_note = models.TextField(blank=True)
+    started = models.BooleanField(default=False)
+    completed = models.BooleanField(default=False)
